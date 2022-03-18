@@ -8,24 +8,24 @@ openssl req \
 	-out server/server_cert.pem \
 	-nodes \
 	-days 365 \
-	-subj "/CN=localhost/O=Client\ Certificate\ Demo"
+	-subj "/CN=TestAuthority/O=Client\ Certificate\ Demo"
 
 # generate server-signed (valid) certifcate
 openssl req \
 	-newkey rsa:4096 \
-	-keyout client/alice_key.pem \
-	-out client/alice_csr.pem \
+	-keyout client/jestina_key.pem \
+	-out client/jestina_csr.pem \
 	-nodes \
 	-days 365 \
-	-subj "/CN=Alice"
+	-subj "/CN=Jestina"
 
 # sign with server_cert.pem
 openssl x509 \
 	-req \
-	-in client/alice_csr.pem \
+	-in client/jestina_csr.pem \
 	-CA server/server_cert.pem \
 	-CAkey server/server_key.pem \
-	-out client/alice_cert.pem \
+	-out client/jestina_cert.pem \
 	-set_serial 01 \
 	-days 365
 
